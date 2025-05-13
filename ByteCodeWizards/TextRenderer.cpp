@@ -3,10 +3,12 @@
 #include "PieceTable.h"
 #include "Input.h"
 
-TextRenderer::TextRenderer(Input* in)
+TextRenderer::TextRenderer(Input* in, int width)
 {
 	input = in;
 	input->setTyping(true);
+
+	max_line_length = width / 24;
 
 	table = new PieceTable();
 
@@ -35,12 +37,12 @@ void TextRenderer::handleInput(float dt)
 	std::string::size_type found = string.find((char)8);
 	if (std::string::npos != found)
 	{
-		if (found > 0 && (int)string.length() >= 2) {
-			string.erase(found - 1, found);
-		}
-		else {
-			string.erase(found);
-		}
+		table->delete_letter(table->total_length() - 1);
+		string.erase(found);
+	}
+
+	if (string != "") {
+		table->insert(table->total_length() - 1, string);
 	}
 }
 

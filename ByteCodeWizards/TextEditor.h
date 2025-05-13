@@ -1,15 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Input.h"
+#include "TextRenderer.h"
 class TextEditor
 {
 private:
 	sf::RenderWindow* window;
-	sf::Font font;
-	sf::Text text{ font };
-
 	Input* input;
-	std::string string;
+
+	TextRenderer* text;
 
 public:
 	TextEditor(sf::RenderWindow* hwnd, Input* in);

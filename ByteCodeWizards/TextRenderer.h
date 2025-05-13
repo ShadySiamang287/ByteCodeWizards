@@ -7,7 +7,7 @@ class PieceTable;
 class TextRenderer
 {
 public:
-	TextRenderer(Input* in);
+	TextRenderer(Input* in, int width);
 	~TextRenderer();
 
 	void update(float dt);
@@ -15,6 +15,7 @@ public:
 	void render(sf::RenderWindow* hwnd);
 
 private:
+	int max_line_length;
 	Input* input;
 	PieceTable* table;
 

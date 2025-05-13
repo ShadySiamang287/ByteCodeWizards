@@ -6,7 +6,7 @@ TextEditor::TextEditor(sf::RenderWindow* hwnd, Input* in)
 	input = in;
 
 	window->setKeyRepeatEnabled(false);
-
+	text = new TextRenderer(in, hwnd->getSize().x);
 }
 
 TextEditor::~TextEditor() 
@@ -16,27 +16,28 @@ TextEditor::~TextEditor()
 
 void TextEditor::update(float dt) 
 {
-	text.setString(string);
+	text->update(dt);
 }
 
 void TextEditor::handleInput(float dt){
-	string += input->getTypedString();
+	//string += input->getTypedString();
 
-	std::string::size_type found = string.find((char)8);
-	if (std::string::npos != found)
-	{
-		if (found > 0 && (int)string.length() >= 2) {
-			string.erase(found - 1, found);
-		}
-		else {
-			string.erase(found);
-		}
-	}
+	//std::string::size_type found = string.find((char)8);
+	//if (std::string::npos != found)
+	//{
+	//	if (found > 0 && (int)string.length() >= 2) {
+	//		string.erase(found - 1, found);
+	//	}
+	//	else {
+	//		string.erase(found);
+	//	}
+	//}
+	text->handleInput(dt);
 }
 
 void TextEditor::render()
 {
 	window->clear(sf::Color::Blue);
-	window->draw(text);
+	text->render(window);
 	window->display();
 }

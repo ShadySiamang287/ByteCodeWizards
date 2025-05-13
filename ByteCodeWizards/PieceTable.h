@@ -9,6 +9,7 @@ public:
 	PieceTable();
 
 	void insert(int index, std::string string);
+	void delete_letter(int index);
 
 	char index(int index);
 	std::string resultant_string();
@@ -24,13 +25,15 @@ private:
 		ADD,
 	};
 
-	struct table_row {
+	struct TableRow {
 		type which;
 		int start;
 		int length;
 	};
 
-	std::vector<table_row> table;
+	TableRow * get_row_of_index(int letter_index);
+
+	std::vector<TableRow> table;
 	std::string original;
 	std::string add;
 
