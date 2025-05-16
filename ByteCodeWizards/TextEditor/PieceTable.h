@@ -2,11 +2,13 @@
 #include <vector>
 #include <string>
 
+class Cursor;
+
 class PieceTable
 {
 public:
-	PieceTable(std::string path);
-	PieceTable();
+	PieceTable(std::string path, Cursor* cur);
+	PieceTable(Cursor* cur);
 
 	void insert(int index, std::string string);
 	void delete_letter(int index);
@@ -25,12 +27,14 @@ private:
 		ADD,
 	};
 
+public:
 	struct TableRow {
 		type which;
 		int start;
 		int length;
 	};
 
+private:
 	TableRow * get_row_of_index(int letter_index);
 
 	std::vector<TableRow> table;
@@ -38,5 +42,7 @@ private:
 	std::string add;
 
 	std::string file_path;
+
+	Cursor* cursor;
 };
 

@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "TextEditor.h"
+#include "TextEditor/TextEditor.h"
 #include "Input.h"
 
 #include <windows.h>

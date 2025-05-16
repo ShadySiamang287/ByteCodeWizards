@@ -1,7 +1,6 @@
 #include "TextRenderer.h"
 
 #include "PieceTable.h"
-#include "Input.h"
 
 TextRenderer::TextRenderer(Input* in, int width)
 {

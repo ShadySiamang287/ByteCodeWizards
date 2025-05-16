@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Input.h"
+#include "../Input.h"
 #include "TextRenderer.h"
 class TextEditor
 {

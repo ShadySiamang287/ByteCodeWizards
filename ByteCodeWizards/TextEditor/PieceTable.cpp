@@ -3,7 +3,9 @@
 #include <filesystem>
 #include <fstream>
 
-PieceTable::PieceTable(std::string path)
+#include "Cursor.h"
+
+PieceTable::PieceTable(std::string path, Cursor* cur)
 {
 	file_path = path;
 	original = "";
@@ -16,13 +18,20 @@ PieceTable::PieceTable(std::string path)
 	table.push_back(TableRow{ ORIGINAL, 0, (int)original.length()});
 	add = "";
 	table.push_back(TableRow{ ADD, 0, 0 });
+
+	cursor = cur;
+	cursor->set_row(&table.back());
 }
 
-PieceTable::PieceTable()
+PieceTable::PieceTable(Cursor* cur)
 {
 	original = "";
 	table.push_back(TableRow{ ORIGINAL, 0, 0});
 	add = "";
+	table.push_back(TableRow{ ADD, 0, 0 });
+
+	cursor = cur;
+	cursor->set_row(&table.back());
 }
 
 void PieceTable::insert(int index, std::string string)

@@ -36,13 +36,16 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\HelperClasses</Filter>
     </ClCompile>
-    <ClCompile Include="TextEditor.cpp">
+    <ClCompile Include="TextEditor\TextRenderer.cpp">
       <Filter>Source Files\TextEditor</Filter>
     </ClCompile>
-    <ClCompile Include="PieceTable.cpp">
+    <ClCompile Include="TextEditor\TextEditor.cpp">
       <Filter>Source Files\TextEditor</Filter>
     </ClCompile>
-    <ClCompile Include="TextRenderer.cpp">
+    <ClCompile Include="TextEditor\PieceTable.cpp">
+      <Filter>Source Files\TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\Cursor.cpp">
       <Filter>Source Files\TextEditor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,13 +56,16 @@
     <ClInclude Include="Input.h">
       <Filter>Header Files\HelperClasses</Filter>
     </ClInclude>
-    <ClInclude Include="TextEditor.h">
+    <ClInclude Include="TextEditor\TextRenderer.h">
       <Filter>Header Files\TextEditor</Filter>
     </ClInclude>
-    <ClInclude Include="PieceTable.h">
+    <ClInclude Include="TextEditor\Cursor.h">
       <Filter>Header Files\TextEditor</Filter>
     </ClInclude>
-    <ClInclude Include="TextRenderer.h">
+    <ClInclude Include="TextEditor\PieceTable.h">
+      <Filter>Header Files\TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\TextEditor.h">
       <Filter>Header Files\TextEditor</Filter>
     </ClInclude>
   </ItemGroup>
