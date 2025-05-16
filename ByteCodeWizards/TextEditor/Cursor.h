@@ -5,6 +5,8 @@ class Cursor : public GameObject {
 public:
 	Cursor(); 
 
+	void handleInput(float dt) override;
+
 	PieceTable::TableRow* get_row();
 	void set_row(PieceTable::TableRow* new_row);
 
@@ -14,8 +16,11 @@ public:
 	int get_local_pos();
 	void set_local_pos(int new_pos);
 
+	void set_table(PieceTable* new_table);
+
 private:
 	PieceTable::TableRow* row;
+	PieceTable* table;
 	int local_pos;
 	int global_pos;
 };

@@ -5,7 +5,7 @@
 
 #include "Cursor.h"
 
-PieceTable::PieceTable(std::string path, Cursor* cur)
+PieceTable::PieceTable(Cursor* cur, std::string path)
 {
 	file_path = path;
 	original = "";
@@ -34,34 +34,14 @@ PieceTable::PieceTable(Cursor* cur)
 	cursor->set_row(&table.back());
 }
 
-void PieceTable::insert(int index, std::string string)
+void PieceTable::insert(std::string string)
 {
-	if (index == total_length() - 1) {
-		if (table.back().which == ADD){
-			table.back().length += (int)string.length();
-		}
-		else {
-			table.push_back(TableRow{ ADD, (int)add.length(), (int)string.length() });
-		}
-	}
-	add += string;
+
 }
 
-void PieceTable::delete_letter(int index)
+void PieceTable::delete_letter()
 {
-	if (index < 0 || index > total_length()) {
-		return;
-	}
 
-	if (index == total_length() - 1) {
-		if (table.back().length > 0) {
-			table.back().length -= 1;
-			table.push_back(TableRow{ ADD, (int)add.length(), 0 });
-		}
-		else if (table[table.size() - 2].length > 0) {
-			table[table.size() - 2].length -= 1;
-		}
-	}
 }
 
 char PieceTable::index(int index)
@@ -117,6 +97,7 @@ PieceTable::TableRow* PieceTable::get_row_of_index(int letter_index)
 
 	// get the starting point of all rows
 	std::vector<int> row_starts(table.size(), 0);
+	row_starts[0] = 0;
 	for (size_t i = 0; i < table.size(); i++) {
 		row_starts[i] = row_starts[i - 1] + table[i - 1].length;
 	}
@@ -141,5 +122,22 @@ PieceTable::TableRow* PieceTable::get_row_of_index(int letter_index)
 		}
 	}
 
+	return nullptr;
+}
+
+PieceTable::TableRow* PieceTable::insert_row_after(TableRow* address, TableRow new_row)
+{
+	if (address == nullptr) {
+		table.insert(table.begin(), new_row);
+		return &table.front();
+	}
+	for (size_t i = 0; i < table.size(); i++) {
+		if (&table[i] == address) {
+			if (i < table.size() - 1) {
+				table.insert(table.begin() + i + 1, new_row);
+				return &table[i + 1];
+			}
+		}
+	}
 	return nullptr;
 }

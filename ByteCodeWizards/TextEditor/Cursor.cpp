@@ -7,6 +7,13 @@ Cursor::Cursor()
 	global_pos = 0;
 }
 
+void Cursor::handleInput(float dt)
+{
+	if (local_pos > row->length) {
+
+	}
+}
+
 PieceTable::TableRow* Cursor::get_row()
 {
 	return row;
@@ -35,4 +42,9 @@ int Cursor::get_local_pos()
 void Cursor::set_local_pos(int new_pos)
 {
 	local_pos = new_pos;
+}
+
+void Cursor::set_table(PieceTable* new_table)
+{
+	table = new_table;
 }

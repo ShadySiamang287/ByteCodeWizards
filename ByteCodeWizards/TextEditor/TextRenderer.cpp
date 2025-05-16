@@ -9,7 +9,8 @@ TextRenderer::TextRenderer(Input* in, int width)
 
 	max_line_length = width / 24;
 
-	table = new PieceTable();
+	cursor.setInput(input);
+	table = new PieceTable(&cursor);
 
 	if (!font.openFromFile("font/mark_pro.otf")) {
 		throw "Font failed to load to font!";
@@ -36,12 +37,12 @@ void TextRenderer::handleInput(float dt)
 	std::string::size_type found = string.find((char)8);
 	if (std::string::npos != found)
 	{
-		table->delete_letter(table->total_length() - 1);
+		table->delete_letter();
 		string.erase(found);
 	}
 
 	if (string != "") {
-		table->insert(table->total_length() - 1, string);
+		table->insert(string);
 	}
 }
 

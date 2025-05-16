@@ -7,11 +7,11 @@ class Cursor;
 class PieceTable
 {
 public:
-	PieceTable(std::string path, Cursor* cur);
 	PieceTable(Cursor* cur);
+	PieceTable(Cursor* cur, std::string path);
 
-	void insert(int index, std::string string);
-	void delete_letter(int index);
+	void insert(std::string string);
+	void delete_letter();
 
 	char index(int index);
 	std::string resultant_string();
@@ -32,10 +32,14 @@ public:
 		type which;
 		int start;
 		int length;
+		bool operator==(const TableRow& other) const {
+			return which == other.which && start == other.start && length == other.length;
+		}
 	};
 
 private:
-	TableRow * get_row_of_index(int letter_index);
+	TableRow* get_row_of_index(int letter_index);
+	TableRow* insert_row_after(TableRow* address, TableRow new_row);
 
 	std::vector<TableRow> table;
 	std::string original;

@@ -16,6 +16,11 @@ void GameObject::update(float dt)
 {
 }
 
+void GameObject::setInput(Input* in)
+{
+	input = in;
+}
+
 void GameObject::setVelocity(sf::Vector2f vel)
 {
 	velocity = vel;
