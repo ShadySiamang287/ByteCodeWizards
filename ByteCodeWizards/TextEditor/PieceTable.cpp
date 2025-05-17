@@ -104,7 +104,26 @@ void PieceTable::delete_letter()
 
 char PieceTable::index(int index)
 {
-	return 0;
+	// Find the row containing the index
+	int current = 0;
+	for (const TableRow& row : table) {
+		if (index < current + row.length) {
+			int offset = row.start + (index - current);
+
+			if (row.which == ORIGINAL) {
+				if (offset >= 0 && offset < (int)original.size())
+					return original[offset];
+			}
+			else if (row.which == ADD) {
+				if (offset >= 0 && offset < (int)add.size())
+					return add[offset];
+			}
+
+			return '\0'; // Out of bounds in source string
+		}
+		current += row.length;
+	}
+	return '\0'; // Not found
 }
 
 std::string PieceTable::resultant_string()
