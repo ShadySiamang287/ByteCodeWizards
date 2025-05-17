@@ -36,12 +36,70 @@ PieceTable::PieceTable(Cursor* cur)
 
 void PieceTable::insert(std::string string)
 {
+	int local_pos = cursor->get_local_pos();
+	int global_pos = cursor->get_global_pos();
+	TableRow* current_row = cursor->get_row();
+	// nullptr check
+	if (current_row == nullptr) {
+		cursor->set_row(&table.back());
+		current_row = &table.back();
+	}
 
+	// if the current row is using the original string
+	if (current_row->which == ORIGINAL) {
+		TableRow* new_row = insert_row_after(current_row, TableRow{ ADD, (int)add.length(), 1 });
+
+		cursor->set_local_pos(1);
+		cursor->set_row(new_row);
+	}
+	// if the current row being inserted into is the end of the string addition string
+	else if (current_row->start == (add.length() - current_row->length)) {
+		++current_row->length;
+		cursor->set_local_pos(++local_pos);
+	}
+	// any other string;
+	else {
+		// calc the difference in rows
+		int difference = current_row->length - local_pos;
+		
+		current_row->length = local_pos;
+		TableRow* new_row = insert_row_after(current_row, TableRow{ ADD, (int)add.length(), 1 });
+		insert_row_after(new_row, TableRow{ ADD, current_row->start + difference, difference });
+
+		cursor->set_local_pos(1);
+		cursor->set_row(new_row);
+	}
+
+	add += string;
+	cursor->set_global_pos(++global_pos);
 }
 
 void PieceTable::delete_letter()
 {
+	int local_pos = cursor->get_local_pos();
+	int global_pos = cursor->get_global_pos();
+	TableRow* current_row = cursor->get_row();
 
+	// only at local_pos 0 if the row is empty
+	if (local_pos == 0) {
+		auto table_pos = std::find(table.begin(), table.end(), *current_row);
+		if (table_pos != table.end() && table_pos != table.begin()) {
+			size_t index = std::distance(table.begin(), table_pos);
+			cursor->set_row(&table[index - 1]);
+			table.erase(table_pos);
+		}
+	}
+	else if (current_row->length > 0) {
+		current_row->length -= 1;
+	}
+
+	if (local_pos > 0){
+		cursor->set_local_pos(--local_pos);
+	}
+
+	if (global_pos > 0) {
+		cursor->set_global_pos(--global_pos);
+	}
 }
 
 char PieceTable::index(int index)
@@ -139,5 +197,7 @@ PieceTable::TableRow* PieceTable::insert_row_after(TableRow* address, TableRow n
 			}
 		}
 	}
-	return nullptr;
+	
+	table.push_back(new_row);
+	return &table.back();
 }

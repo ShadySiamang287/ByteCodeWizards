@@ -11,6 +11,7 @@ TextRenderer::TextRenderer(Input* in, int width)
 
 	cursor.setInput(input);
 	table = new PieceTable(&cursor);
+	cursor.set_table(table);
 
 	if (!font.openFromFile("font/mark_pro.otf")) {
 		throw "Font failed to load to font!";

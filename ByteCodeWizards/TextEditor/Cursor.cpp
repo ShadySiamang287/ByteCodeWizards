@@ -1,7 +1,9 @@
 #include "Cursor.h"
+#include <iostream>
 
 Cursor::Cursor()
 {
+	table = nullptr;
 	row = nullptr;
 	local_pos = 0;
 	global_pos = 0;
