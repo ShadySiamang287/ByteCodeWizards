@@ -7,6 +7,14 @@ Cursor::Cursor()
 	row = nullptr;
 	local_pos = 0;
 	global_pos = 0;
+
+	blink.addFrame(sf::IntRect({ 0, 0 }, { 15, 24 }));
+	blink.addFrame(sf::IntRect({ 15, 0 }, { 15, 24 }));
+	blink.setLooping(true);
+	blink.setFrameSpeed(10.0f);
+
+	texture.loadFromFile("./GFX/cursor.png");
+	setTexture(&texture);
 }
 
 void Cursor::handleInput(float dt)
@@ -14,6 +22,12 @@ void Cursor::handleInput(float dt)
 	if (local_pos > row->length) {
 
 	}
+}
+
+void Cursor::update(float dt)
+{
+	blink.animate(dt);
+	setTextureRect(blink.getCurrentFrame());
 }
 
 PieceTable::TableRow* Cursor::get_row()

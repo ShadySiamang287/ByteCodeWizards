@@ -48,6 +48,9 @@
     <ClCompile Include="TextEditor\Cursor.cpp">
       <Filter>Source Files\TextEditor</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\HelperClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="TextEditor\TextEditor.h">
       <Filter>Header Files\TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\HelperClasses</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

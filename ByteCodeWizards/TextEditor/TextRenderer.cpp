@@ -12,6 +12,8 @@ TextRenderer::TextRenderer(Input* in, int width)
 	cursor.setInput(input);
 	table = new PieceTable(&cursor);
 	cursor.set_table(table);
+	cursor.setSize(sf::Vector2f(15.0f, 2.0f));
+	cursor.setPosition(sf::Vector2f(0.0f, 24.0f));
 
 	if (!font.openFromFile("font/mark_pro.otf")) {
 		throw "Font failed to load to font!";
@@ -28,6 +30,7 @@ TextRenderer::~TextRenderer()
 
 void TextRenderer::update(float dt)
 {
+	cursor.update(dt);
 	text->setString(table->resultant_string());
 }
 
@@ -50,4 +53,5 @@ void TextRenderer::handleInput(float dt)
 void TextRenderer::render(sf::RenderWindow* hwnd)
 {
 	hwnd->draw(*text);
+	hwnd->draw(cursor);
 }

@@ -1,11 +1,14 @@
 #include "PieceTable.h"
+
 #include "../GameObject.h"
+#include "../Animation.h"
 
 class Cursor : public GameObject {
 public:
 	Cursor(); 
 
 	void handleInput(float dt) override;
+	void update(float dt) override;
 
 	PieceTable::TableRow* get_row();
 	void set_row(PieceTable::TableRow* new_row);
@@ -23,4 +26,7 @@ private:
 	PieceTable* table;
 	int local_pos;
 	int global_pos;
+
+	Animation blink;
+	sf::Texture texture;
 };

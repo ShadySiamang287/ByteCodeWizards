@@ -8,7 +8,7 @@
 PieceTable::PieceTable(Cursor* cur, std::string path)
 {
 	file_path = path;
-	original = "";
+	original = "A";
 	if (std::filesystem::exists(path)) {
 		std::ifstream file(path);
 		original = std::string((std::istreambuf_iterator<char>(file)),
