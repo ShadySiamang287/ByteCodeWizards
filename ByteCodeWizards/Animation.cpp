@@ -1,12 +1,13 @@
 #include "Animation.h"
-#include "iostream"
 
 Animation::Animation()
 {
+	animationSpeed = 0.0f;
 	currentFrame = 0;
 	elapsedTime = 0.0f;
 	isPlaying = true;
 	isLooping = true;
+	flipped = false;
 }
 
 void Animation::addFrame(sf::IntRect rect)

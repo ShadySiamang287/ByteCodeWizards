@@ -12,14 +12,15 @@ TextRenderer::TextRenderer(Input* in, int width)
 	cursor.setInput(input);
 	table = new PieceTable(&cursor);
 	cursor.set_table(table);
-	cursor.setSize(sf::Vector2f(15.0f, 2.0f));
-	cursor.setPosition(sf::Vector2f(0.0f, 24.0f));
+	cursor.setSize(sf::Vector2f(15.0f, 20.0f));
+	cursor.setPosition(sf::Vector2f(1.0f, 5.0f));
 
 	if (!font.openFromFile("font/mark_pro.otf")) {
 		throw "Font failed to load to font!";
 	}
 	text = new sf::Text(font);
 	text->setPosition(sf::Vector2f(0.0f, 0.0f));
+	text->setCharacterSize(24);
 }
 
 TextRenderer::~TextRenderer()

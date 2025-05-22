@@ -1,5 +1,4 @@
 #include "Cursor.h"
-#include <iostream>
 
 Cursor::Cursor()
 {
@@ -11,9 +10,11 @@ Cursor::Cursor()
 	blink.addFrame(sf::IntRect({ 0, 0 }, { 15, 24 }));
 	blink.addFrame(sf::IntRect({ 15, 0 }, { 15, 24 }));
 	blink.setLooping(true);
-	blink.setFrameSpeed(10.0f);
+	blink.setFrameSpeed(30.0f);
 
-	texture.loadFromFile("./GFX/cursor.png");
+	if (!texture.loadFromFile("./GFX/cursor.png")) {
+		throw "Failed to load cursor.png";
+	}
 	setTexture(&texture);
 }
 

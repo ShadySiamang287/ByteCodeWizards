@@ -1,8 +1,11 @@
 #include <SFML/Graphics.hpp>
+
 #include "TextEditor/TextEditor.h"
 #include "Input.h"
 
 #include <windows.h>
+
+const float MS_PER_UPDATE = 1000.0f / 60.0f;
 
 void windowProcess(sf::RenderWindow* window, Input* input) {
     input->clearString();
@@ -63,14 +66,23 @@ int main()
     TextEditor level = TextEditor(&window, &input);
     
     sf::Clock clock;
-    float deltaTime;
+    float previous = (float)clock.restart().asMilliseconds();
+    float lag = 0.0f;
     while (window.isOpen())
     {
         windowProcess(&window, &input);
-        deltaTime = (float)clock.restart().asMilliseconds();
+
+        float current = clock.getElapsedTime().asMilliseconds();
+        float deltaTime = current - previous;
+        previous = current;
+        lag += deltaTime;
 
         level.handleInput(deltaTime);
-        level.update(deltaTime);
+
+        while (lag >= MS_PER_UPDATE){
+            level.update(deltaTime);
+            lag -= MS_PER_UPDATE;
+        }
         level.render();
     }
 }
