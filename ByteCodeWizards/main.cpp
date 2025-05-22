@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include "TextEditor/TextEditor.h"
+#include "TextEditor/SpellEditor.h"
 #include "Input.h"
 
 #include <windows.h>
@@ -63,9 +63,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode({ 1280, 720 }), "Bytecode wizards!");
     Input input;
     
-    TextEditor level = TextEditor(&window, &input);
-    
-    sf::Clock clock;
+    SpellEditor level = SpellEditor(&window, &input);
     float previous = (float)clock.restart().asMilliseconds();
     float lag = 0.0f;
     while (window.isOpen())

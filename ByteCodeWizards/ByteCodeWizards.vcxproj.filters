@@ -19,10 +19,10 @@
     <Filter Include="Header Files\HelperClasses">
       <UniqueIdentifier>{62a62020-12eb-4256-b9b5-f84fda20ea24}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\TextEditor">
+    <Filter Include="Source Files\Spell Editor">
       <UniqueIdentifier>{db2e7f1e-8d51-4c2a-a6dc-b92b5f1363da}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\TextEditor">
+    <Filter Include="Header Files\Spell Editor">
       <UniqueIdentifier>{5028bf9d-92cc-4f03-85b4-62db4145549c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -36,17 +36,17 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\HelperClasses</Filter>
     </ClCompile>
-    <ClCompile Include="TextEditor\TextRenderer.cpp">
-      <Filter>Source Files\TextEditor</Filter>
-    </ClCompile>
     <ClCompile Include="TextEditor\TextEditor.cpp">
-      <Filter>Source Files\TextEditor</Filter>
+      <Filter>Source Files\Spell Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\SpellEditor.cpp">
+      <Filter>Source Files\Spell Editor</Filter>
     </ClCompile>
     <ClCompile Include="TextEditor\PieceTable.cpp">
-      <Filter>Source Files\TextEditor</Filter>
+      <Filter>Source Files\Spell Editor</Filter>
     </ClCompile>
     <ClCompile Include="TextEditor\Cursor.cpp">
-      <Filter>Source Files\TextEditor</Filter>
+      <Filter>Source Files\Spell Editor</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\HelperClasses</Filter>
@@ -59,17 +59,17 @@
     <ClInclude Include="Input.h">
       <Filter>Header Files\HelperClasses</Filter>
     </ClInclude>
-    <ClInclude Include="TextEditor\TextRenderer.h">
-      <Filter>Header Files\TextEditor</Filter>
+    <ClInclude Include="TextEditor\TextEditor.h">
+      <Filter>Header Files\Spell Editor</Filter>
     </ClInclude>
     <ClInclude Include="TextEditor\Cursor.h">
-      <Filter>Header Files\TextEditor</Filter>
+      <Filter>Header Files\Spell Editor</Filter>
     </ClInclude>
     <ClInclude Include="TextEditor\PieceTable.h">
-      <Filter>Header Files\TextEditor</Filter>
+      <Filter>Header Files\Spell Editor</Filter>
     </ClInclude>
-    <ClInclude Include="TextEditor\TextEditor.h">
-      <Filter>Header Files\TextEditor</Filter>
+    <ClInclude Include="TextEditor\SpellEditor.h">
+      <Filter>Header Files\Spell Editor</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Header Files\HelperClasses</Filter>

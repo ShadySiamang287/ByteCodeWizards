@@ -1,32 +1,58 @@
 #include "TextEditor.h"
 
-TextEditor::TextEditor(sf::RenderWindow* hwnd, Input* in)
+#include "PieceTable.h"
+
+TextEditor::TextEditor(Input* in, int width)
 {
-	window = hwnd;
 	input = in;
+	input->setTyping(true);
 
-	window->setKeyRepeatEnabled(false);
-	text = new TextRenderer(in, hwnd->getSize().x);
+	max_line_length = width / 24;
+
+	cursor.setInput(input);
+	table = new PieceTable(&cursor);
+	cursor.set_table(table);
+	cursor.setSize(sf::Vector2f(15.0f, 20.0f));
+	cursor.setPosition(sf::Vector2f(1.0f, 5.0f));
+
+	if (!font.openFromFile("font/Consolas.ttf")) {
+		throw "Font failed to load to font!";
+	}
+	text = new sf::Text(font);
+	text->setPosition(sf::Vector2f(0.0f, 0.0f));
+	text->setCharacterSize(24);
 }
 
-TextEditor::~TextEditor() 
+TextEditor::~TextEditor()
 {
-	input->setTyping(false);
+	delete text;
+	delete table;
 }
 
-void TextEditor::update(float dt) 
+void TextEditor::update(float dt)
 {
-	text->update(dt);
+	cursor.update(dt);
+	text->setString(table->resultant_string());
 }
 
 void TextEditor::handleInput(float dt)
 {
-	text->handleInput(dt);
+	std::string string = input->getTypedString();
+
+	std::string::size_type found = string.find((char)8);
+	if (std::string::npos != found)
+	{
+		table->delete_letter();
+		string.erase(found);
+	}
+
+	if (string != "") {
+		table->insert(string);
+	}
 }
 
-void TextEditor::render()
+void TextEditor::render(sf::RenderWindow* hwnd)
 {
-	window->clear(sf::Color::Blue);
-	text->render(window);
-	window->display();
+	hwnd->draw(*text);
+	hwnd->draw(cursor);
 }
