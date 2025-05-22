@@ -24,6 +24,8 @@ public:
 private:
 	PieceTable::TableRow* row;
 	PieceTable* table;
+	int	previous_local_pos;
+	int previous_global_pos;
 	int local_pos;
 	int global_pos;
 

@@ -15,7 +15,7 @@ TextRenderer::TextRenderer(Input* in, int width)
 	cursor.setSize(sf::Vector2f(15.0f, 20.0f));
 	cursor.setPosition(sf::Vector2f(1.0f, 5.0f));
 
-	if (!font.openFromFile("font/mark_pro.otf")) {
+	if (!font.openFromFile("font/Consolas.ttf")) {
 		throw "Font failed to load to font!";
 	}
 	text = new sf::Text(font);

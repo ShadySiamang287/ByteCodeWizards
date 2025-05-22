@@ -79,6 +79,7 @@ int main()
 
         level.handleInput(deltaTime);
 
+        // play catchup with the updates
         while (lag >= MS_PER_UPDATE){
             level.update(deltaTime);
             lag -= MS_PER_UPDATE;

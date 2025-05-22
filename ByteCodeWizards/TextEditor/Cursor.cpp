@@ -7,6 +7,9 @@ Cursor::Cursor()
 	local_pos = 0;
 	global_pos = 0;
 
+	previous_local_pos = 0;
+	previous_global_pos = 0;
+
 	blink.addFrame(sf::IntRect({ 0, 0 }, { 15, 24 }));
 	blink.addFrame(sf::IntRect({ 15, 0 }, { 15, 24 }));
 	blink.setLooping(true);
@@ -27,6 +30,18 @@ void Cursor::handleInput(float dt)
 
 void Cursor::update(float dt)
 {
+	if (previous_local_pos != local_pos || previous_global_pos != global_pos) {
+		if (previous_global_pos < global_pos) {
+			move(sf::Vector2f(13.2f, 0.0f));
+		}
+		else {
+			move(sf::Vector2f(-13.2f, 0.0f));
+		}
+	}
+
+	previous_local_pos = local_pos;
+	previous_global_pos = global_pos;
+
 	blink.animate(dt);
 	setTextureRect(blink.getCurrentFrame());
 }
