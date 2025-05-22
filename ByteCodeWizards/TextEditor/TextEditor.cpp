@@ -9,8 +9,9 @@ TextEditor::TextEditor(Input* in, int width)
 
 	max_line_length = width / 24;
 
-	cursor.setInput(input);
 	table = new PieceTable(&cursor);
+
+	cursor.setInput(input);
 	cursor.set_table(table);
 	cursor.setSize(sf::Vector2f(15.0f, 20.0f));
 	cursor.setPosition(sf::Vector2f(1.0f, 5.0f));
@@ -49,6 +50,8 @@ void TextEditor::handleInput(float dt)
 	if (string != "") {
 		table->insert(string);
 	}
+
+	cursor.handleInput(dt);
 }
 
 void TextEditor::render(sf::RenderWindow* hwnd)

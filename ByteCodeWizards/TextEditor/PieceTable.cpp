@@ -8,14 +8,17 @@
 PieceTable::PieceTable(Cursor* cur, std::string path)
 {
 	file_path = path;
-	original = "A";
 	if (std::filesystem::exists(path)) {
 		std::ifstream file(path);
 		original = std::string((std::istreambuf_iterator<char>(file)),
 								std::istreambuf_iterator<char>());
 		file.close();
 	}
+	else {
+		original = "";
+	}
 	table.push_back(TableRow{ ORIGINAL, 0, (int)original.length()});
+	
 	add = "";
 	table.push_back(TableRow{ ADD, 0, 0 });
 
@@ -27,6 +30,7 @@ PieceTable::PieceTable(Cursor* cur)
 {
 	original = "";
 	table.push_back(TableRow{ ORIGINAL, 0, 0});
+
 	add = "";
 	table.push_back(TableRow{ ADD, 0, 0 });
 
@@ -70,8 +74,16 @@ void PieceTable::insert(std::string string)
 		cursor->set_row(new_row);
 	}
 
+
 	add += string;
-	cursor->set_global_pos(++global_pos);
+	if (string == "\n") {
+		cursor->increase_line_number();
+	}
+	else {
+		cursor->set_global_pos(++global_pos);
+		cursor->increase_line_pos();
+	}
+
 }
 
 void PieceTable::delete_letter()
@@ -79,6 +91,11 @@ void PieceTable::delete_letter()
 	int local_pos = cursor->get_local_pos();
 	int global_pos = cursor->get_global_pos();
 	TableRow* current_row = cursor->get_row();
+
+	// check if the deleted character in a new line
+	if (index(global_pos) == (char)"\n") {
+		cursor->decrease_line_number();
+	}
 
 	// only at local_pos 0 if the row is empty
 	if (local_pos == 0) {
@@ -100,6 +117,8 @@ void PieceTable::delete_letter()
 	if (global_pos > 0) {
 		cursor->set_global_pos(--global_pos);
 	}
+
+	cursor->decrease_line_pos();
 }
 
 char PieceTable::index(int index)

@@ -62,10 +62,13 @@ int main()
 {   
     sf::RenderWindow window(sf::VideoMode({ 1280, 720 }), "Bytecode wizards!");
     Input input;
-    
+
     SpellEditor level = SpellEditor(&window, &input);
+    
+    sf::Clock clock;
     float previous = (float)clock.restart().asMilliseconds();
     float lag = 0.0f;
+
     while (window.isOpen())
     {
         windowProcess(&window, &input);
